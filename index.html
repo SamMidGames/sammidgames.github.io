@@ -10,230 +10,394 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background: #f0f0f0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
 
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: auto;
         }
 
         .card {
             background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             text-align: center;
-            min-height: 150px;
+            min-height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
 
         /* Trick 1: Glassmorphism */
         .trick1 {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
         }
 
         /* Trick 2: Clip-path */
         .trick2 {
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
         }
 
-        /* Trick 3: Variable fonts */
+        /* Trick 3: Text gradient */
         .trick3 {
-            font-variation-settings: "wght" 700, "wdth" 150;
+            background: linear-gradient(to right, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         /* Trick 4: Aspect ratio */
         .trick4 {
-            aspect-ratio: 1/1;
-            width: 100px;
-            background: #3498db;
+            aspect-ratio: 16/9;
+            width: 100%;
+            background: linear-gradient(45deg, #3498db, #e74c3c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
         }
 
         /* Trick 5: Scroll snap */
         .trick5 {
             overflow-y: auto;
             scroll-snap-type: y mandatory;
-            height: 100px;
+            height: 150px;
+            background: #f8f9fa;
         }
 
         .trick5 div {
             scroll-snap-align: start;
-            height: 100px;
-            background: #e74c3c;
+            height: 50px;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
         }
 
         /* Trick 6: Object-fit */
+        .trick6 {
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
         .trick6 img {
             width: 100%;
-            height: 100px;
+            height: 100%;
             object-fit: cover;
         }
 
-        /* Trick 7: Filter */
+        /* Trick 7: Filter effects */
         .trick7 {
-            filter: grayscale(100%) brightness(50%);
+            filter: hue-rotate(180deg) saturate(200%) brightness(120%);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
         }
 
         /* Trick 8: Blend mode */
         .trick8 {
-            background: url('https://via.placeholder.com/150') center/cover;
+            background: linear-gradient(45deg, #8e44ad, #3498db);
             background-blend-mode: multiply;
-            background-color: #8e44ad;
+            position: relative;
+        }
+
+        .trick8::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.3)"/></svg>');
+            background-size: 20px 20px;
+            mix-blend-mode: overlay;
         }
 
         /* Trick 9: Sticky position */
         .trick9 {
             position: sticky;
-            top: 0;
-            background: #2ecc71;
+            top: 20px;
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: white;
+            z-index: 10;
         }
 
         /* Trick 10: Custom properties */
         .trick10 {
             --main-color: #e67e22;
-            background: var(--main-color);
+            --secondary-color: #d35400;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            color: white;
         }
 
         /* Trick 11: Shape-outside */
         .trick11 {
-            shape-outside: circle(50%);
-            width: 100px;
-            height: 100px;
-            float: left;
+            position: relative;
+            background: #f8f9fa;
+            text-align: left;
+            padding: 20px;
+        }
+
+        .trick11::before {
+            content: '';
+            width: 80px;
+            height: 80px;
             background: #f1c40f;
+            border-radius: 50%;
+            float: left;
+            shape-outside: circle(50%);
+            margin-right: 15px;
         }
 
         /* Trick 12: Conic gradient */
         .trick12 {
-            background: conic-gradient(#3498db, #e74c3c, #3498db);
+            background: conic-gradient(from 0deg, #3498db, #e74c3c, #f39c12, #2ecc71, #9b59b6, #3498db);
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Trick 13: Overscroll behavior */
         .trick13 {
             overscroll-behavior: contain;
             overflow: auto;
-            height: 100px;
+            height: 150px;
+            background: #f8f9fa;
         }
 
-        /* Trick 14: Text gradient */
+        .trick13 div {
+            height: 200px;
+            background: linear-gradient(45deg, #34495e, #2c3e50);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Trick 14: Text-stroke */
         .trick14 {
-            background: linear-gradient(to right, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
+            -webkit-text-stroke: 2px #c0392b;
             color: transparent;
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ecf0f1, #bdc3c7);
         }
 
         /* Trick 15: Accent color */
-        .trick15 input {
-            accent-color: #9b59b6;
+        .trick15 {
+            background: #f8f9fa;
         }
 
-        /* Trick 16: Gap in flex */
+        .trick15 input {
+            accent-color: #9b59b6;
+            transform: scale(2);
+            margin: 10px;
+        }
+
+        /* Trick 16: Flex gap */
         .trick16 {
             display: flex;
-            gap: 10px;
+            gap: 15px;
+            background: #f8f9fa;
+            padding: 20px;
         }
 
         .trick16 div {
-            width: 30px;
-            height: 30px;
-            background: #1abc9c;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #1abc9c, #16a085);
+            border-radius: 8px;
         }
 
         /* Trick 17: Logical properties */
         .trick17 {
             margin-block: 20px;
-            padding-inline: 10px;
-            background: #34495e;
+            padding-inline: 20px;
+            background: linear-gradient(45deg, #34495e, #2c3e50);
+            color: white;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
         }
 
         /* Trick 18: Container queries */
         .trick18 {
             container-type: inline-size;
+            background: #f8f9fa;
         }
 
-        @container (min-width: 200px) {
+        @container (min-width: 250px) {
             .trick18 {
-                background: #d35400;
+                background: linear-gradient(45deg, #d35400, #e67e22);
+                color: white;
             }
         }
 
-        /* Trick 19: Scrollbar styling */
+        /* Trick 19: Custom scrollbar */
+        .trick19 {
+            overflow: auto;
+            height: 150px;
+            background: #f8f9fa;
+        }
+
         .trick19::-webkit-scrollbar {
-            width: 8px;
+            width: 12px;
+        }
+
+        .trick19::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 6px;
         }
 
         .trick19::-webkit-scrollbar-thumb {
-            background: #2980b9;
-            border-radius: 4px;
+            background: linear-gradient(45deg, #2980b9, #3498db);
+            border-radius: 6px;
         }
 
-        .trick19 {
-            overflow: auto;
-            height: 100px;
+        .trick19::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #1f5f8b, #2980b9);
         }
 
-        /* Trick 20: Text-stroke */
+        .trick19 div {
+            height: 200px;
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Trick 20: Masking */
         .trick20 {
-            -webkit-text-stroke: 1px #c0392b;
-            color: transparent;
+            mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
         }
 
-        /* Trick 21: Masking */
+        /* Trick 21: CSS Grid with auto-fit */
         .trick21 {
-            mask-image: linear-gradient(to bottom, transparent, black);
-            background: #27ae60;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 10px;
+            background: #f8f9fa;
+            padding: 20px;
         }
 
-        /* Trick 22: Subgrid */
+        .trick21 div {
+            height: 40px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            border-radius: 6px;
+        }
+
+        /* Trick 22: CSS Variables with fallbacks */
         .trick22 {
-            display: grid;
-            grid-template-columns: subgrid;
+            --primary: #3498db;
+            --secondary: #e74c3c;
+            --fallback: #95a5a6;
+            background: linear-gradient(45deg, var(--primary, var(--fallback)), var(--secondary, var(--fallback)));
+            color: white;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                min-height: 150px;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="card trick1">1. Glassmorphism</div>
-        <div class="card trick2">2. Clip-path</div>
-        <div class="card trick3">3. Variable Fonts</div>
-        <div class="card trick4">4. Aspect Ratio</div>
+        <div class="card trick1">1. Glassmorphism Effect</div>
+        <div class="card trick2">2. Clip-path Polygon</div>
+        <div class="card trick3">3. Text Gradient</div>
+        <div class="card trick4">4. Aspect Ratio 16:9</div>
         <div class="card trick5">
-            <div>5. Scroll Snap</div>
-            <div>Scroll Me</div>
+            <div>Scroll Snap Item 1</div>
+            <div>Scroll Snap Item 2</div>
+            <div>Scroll Snap Item 3</div>
         </div>
-        <div class="card trick6"><img src="https://via.placeholder.com/150" alt="Object Fit"></div>
-        <div class="card trick7">7. Filter</div>
+        <div class="card trick6">
+            <img src="https://picsum.photos/300/200?random=1" alt="Object Fit Demo">
+        </div>
+        <div class="card trick7">7. Filter Effects</div>
         <div class="card trick8">8. Blend Mode</div>
         <div class="card trick9">9. Sticky Position</div>
-        <div class="card trick10">10. Custom Properties</div>
-        <div class="card trick11">11. Shape-outside</div>
-        <div class="card trick12">12. Conic Gradient</div>
-        <div class="card trick13">13. Overscroll Behavior<div>Scroll content</div>
+        <div class="card trick10">10. CSS Custom Properties</div>
+        <div class="card trick11">11. Shape-outside with floating circle</div>
+        <div class="card trick12">12. Conic Gradient Animation</div>
+        <div class="card trick13">
+            <div>13. Overscroll Behavior - Scroll to see effect</div>
         </div>
-        <div class="card trick14">14. Text Gradient</div>
-        <div class="card trick15"><input type="checkbox"> 15. Accent Color</div>
+        <div class="card trick14">14. Text-stroke Effect</div>
+        <div class="card trick15">
+            <input type="checkbox"> 15. Accent Color
+        </div>
         <div class="card trick16">
             <div></div>
-            <div></div>16. Flex Gap
+            <div></div>
+            <div></div>
+            16. Flex Gap
         </div>
         <div class="card trick17">17. Logical Properties</div>
         <div class="card trick18">18. Container Queries</div>
-        <div class="card trick19">19. Scrollbar Styling<div>Scroll content</div>
+        <div class="card trick19">
+            <div>19. Custom Scrollbar - Scroll to see</div>
         </div>
-        <div class="card trick20">20. Text-stroke</div>
-        <div class="card trick21">21. Masking</div>
-        <div class="card trick22">22. Subgrid</div>
+        <div class="card trick20">20. Masking Effect</div>
+        <div class="card trick21">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            21. CSS Grid Auto-fit
+        </div>
+        <div class="card trick22">22. CSS Variables with Animation</div>
     </div>
 </body>
+
+</html>
 
 </html>
