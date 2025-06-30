@@ -37,22 +37,23 @@
             overflow: hidden;
         }
 
-        /* Trick 1: Glassmorphism */
+        /* Trick 1: CSS Counters */
         .trick1 {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            counter-reset: item;
+            background: #f8f9fa;
+            padding: 20px;
         }
 
-        /* Trick 2: Clip-path */
+        .trick1::before {
+            counter-increment: item;
+            content: "Item " counter(item);
+            display: block;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        /* Trick 2: Text gradient */
         .trick2 {
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-        }
-
-        /* Trick 3: Text gradient */
-        .trick3 {
             background: linear-gradient(to right, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
             -webkit-background-clip: text;
             background-clip: text;
@@ -61,23 +62,54 @@
             font-weight: bold;
         }
 
-        /* Trick 4: Aspect ratio */
-        .trick4 {
-            aspect-ratio: 16/9;
-            width: 100%;
-            background: linear-gradient(45deg, #3498db, #e74c3c);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Trick 3: CSS Transform with perspective */
+        .trick3 {
+            transform: perspective(500px) rotateY(15deg);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
             color: white;
+            transition: transform 0.3s ease;
         }
 
-        /* Trick 5: Scroll snap */
-        .trick5 {
-            overflow-y: auto;
-            scroll-snap-type: y mandatory;
-            height: 150px;
+        .trick3:hover {
+            transform: perspective(500px) rotateY(0deg);
+        }
+
+        /* Trick 4: CSS Grid Masonry */
+        .trick4 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 40px;
+            gap: 8px;
             background: #f8f9fa;
+            padding: 20px;
+        }
+
+        .trick4 div {
+            background: linear-gradient(45deg, #3498db, #e74c3c);
+            border-radius: 6px;
+            height: 50px;
+        }
+
+        .trick4 div:nth-child(1) {
+            grid-row: span 2;
+        }
+
+        .trick4 div:nth-child(3) {
+            grid-row: span 2;
+        }
+
+        .trick4 div:nth-child(5) {
+            grid-row: span 2;
+        }
+
+        /* Trick 5: CSS Custom Properties with calc() */
+        .trick5 {
+            --base-size: 20px;
+            --multiplier: 3;
+            font-size: calc(var(--base-size) * var(--multiplier));
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            color: white;
+            padding: calc(var(--base-size) / 2);
         }
 
         .trick5 div {
@@ -182,21 +214,29 @@
             }
         }
 
-        /* Trick 13: Overscroll behavior */
+        /* Trick 13: CSS Pseudo-elements with content */
         .trick13 {
-            overscroll-behavior: contain;
-            overflow: auto;
-            height: 150px;
-            background: #f8f9fa;
-        }
-
-        .trick13 div {
-            height: 200px;
+            position: relative;
             background: linear-gradient(45deg, #34495e, #2c3e50);
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        }
+
+        .trick13::before {
+            content: "★";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            color: #f1c40f;
+        }
+
+        .trick13::after {
+            content: "★";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #f1c40f;
         }
 
         /* Trick 14: Text-stroke */
@@ -208,15 +248,57 @@
             background: linear-gradient(45deg, #ecf0f1, #bdc3c7);
         }
 
-        /* Trick 15: Accent color */
+        /* Trick 15: CSS Grid with named areas */
         .trick15 {
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+            grid-template-columns: 1fr 2fr;
+            grid-template-rows: 40px 1fr 40px;
+            gap: 10px;
             background: #f8f9fa;
+            padding: 15px;
         }
 
-        .trick15 input {
-            accent-color: #9b59b6;
-            transform: scale(2);
-            margin: 10px;
+        .trick15::before {
+            content: "Header";
+            grid-area: header;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .trick15::after {
+            content: "Footer";
+            grid-area: footer;
+            background: #e74c3c;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .trick15 div {
+            background: #2ecc71;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .trick15 div:first-of-type {
+            grid-area: sidebar;
+        }
+
+        .trick15 div:last-of-type {
+            grid-area: main;
         }
 
         /* Trick 16: Flex gap */
@@ -244,17 +326,25 @@
             text-orientation: mixed;
         }
 
-        /* Trick 18: Container queries */
+        /* Trick 18: CSS Custom Properties with fallbacks and inheritance */
         .trick18 {
-            container-type: inline-size;
-            background: #f8f9fa;
+            --primary: #d35400;
+            --secondary: #e67e22;
+            --fallback: #95a5a6;
+            background: linear-gradient(45deg, var(--primary, var(--fallback)), var(--secondary, var(--fallback)));
+            color: white;
+            position: relative;
         }
 
-        @container (min-width: 250px) {
-            .trick18 {
-                background: linear-gradient(45deg, #d35400, #e67e22);
-                color: white;
-            }
+        .trick18::before {
+            content: "Inherited";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
         }
 
         /* Trick 19: Custom scrollbar */
@@ -350,15 +440,19 @@
 
 <body>
     <div class="container">
-        <div class="card trick1">1. Glassmorphism Effect</div>
-        <div class="card trick2">2. Clip-path Polygon</div>
-        <div class="card trick3">3. Text Gradient</div>
-        <div class="card trick4">4. Aspect Ratio 16:9</div>
-        <div class="card trick5">
-            <div>Scroll Snap Item 1</div>
-            <div>Scroll Snap Item 2</div>
-            <div>Scroll Snap Item 3</div>
+        <div class="card trick1">1. CSS Counters</div>
+        <div class="card trick2">2. Text Gradient</div>
+        <div class="card trick3">3. CSS Transform with perspective</div>
+        <div class="card trick4">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            4. CSS Grid Masonry
         </div>
+        <div class="card trick5">5. CSS Custom Properties with calc()</div>
         <div class="card trick6">
             <img src="https://picsum.photos/300/200?random=1" alt="Object Fit Demo">
         </div>
@@ -368,12 +462,12 @@
         <div class="card trick10">10. CSS Custom Properties</div>
         <div class="card trick11">11. Shape-outside with floating circle</div>
         <div class="card trick12">12. Conic Gradient Animation</div>
-        <div class="card trick13">
-            <div>13. Overscroll Behavior - Scroll to see effect</div>
-        </div>
+        <div class="card trick13">13. CSS Pseudo-elements with content</div>
         <div class="card trick14">14. Text-stroke Effect</div>
         <div class="card trick15">
-            <input type="checkbox"> 15. Accent Color
+            <div>Sidebar</div>
+            <div>Main Content</div>
+            15. CSS Grid with named areas
         </div>
         <div class="card trick16">
             <div></div>
@@ -382,7 +476,7 @@
             16. Flex Gap
         </div>
         <div class="card trick17">17. Logical Properties</div>
-        <div class="card trick18">18. Container Queries</div>
+        <div class="card trick18">18. CSS Custom Properties with fallbacks and inheritance</div>
         <div class="card trick19">
             <div>19. Custom Scrollbar - Scroll to see</div>
         </div>
@@ -397,7 +491,5 @@
         <div class="card trick22">22. CSS Variables with Animation</div>
     </div>
 </body>
-
-</html>
 
 </html>
