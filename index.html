@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22 CSS Tricks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        /* Trick 1: Glassmorphism */
+        .trick1 {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Trick 2: Clip-path */
+        .trick2 {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        /* Trick 3: Variable fonts */
+        .trick3 {
+            font-variation-settings: "wght" 700, "wdth" 150;
+        }
+
+        /* Trick 4: Aspect ratio */
+        .trick4 {
+            aspect-ratio: 1/1;
+            width: 100px;
+            background: #3498db;
+        }
+
+        /* Trick 5: Scroll snap */
+        .trick5 {
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            height: 100px;
+        }
+
+        .trick5 div {
+            scroll-snap-align: start;
+            height: 100px;
+            background: #e74c3c;
+        }
+
+        /* Trick 6: Object-fit */
+        .trick6 img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        /* Trick 7: Filter */
+        .trick7 {
+            filter: grayscale(100%) brightness(50%);
+        }
+
+        /* Trick 8: Blend mode */
+        .trick8 {
+            background: url('https://via.placeholder.com/150') center/cover;
+            background-blend-mode: multiply;
+            background-color: #8e44ad;
+        }
+
+        /* Trick 9: Sticky position */
+        .trick9 {
+            position: sticky;
+            top: 0;
+            background: #2ecc71;
+        }
+
+        /* Trick 10: Custom properties */
+        .trick10 {
+            --main-color: #e67e22;
+            background: var(--main-color);
+        }
+
+        /* Trick 11: Shape-outside */
+        .trick11 {
+            shape-outside: circle(50%);
+            width: 100px;
+            height: 100px;
+            float: left;
+            background: #f1c40f;
+        }
+
+        /* Trick 12: Conic gradient */
+        .trick12 {
+            background: conic-gradient(#3498db, #e74c3c, #3498db);
+        }
+
+        /* Trick 13: Overscroll behavior */
+        .trick13 {
+            overscroll-behavior: contain;
+            overflow: auto;
+            height: 100px;
+        }
+
+        /* Trick 14: Text gradient */
+        .trick14 {
+            background: linear-gradient(to right, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Trick 15: Accent color */
+        .trick15 input {
+            accent-color: #9b59b6;
+        }
+
+        /* Trick 16: Gap in flex */
+        .trick16 {
+            display: flex;
+            gap: 10px;
+        }
+
+        .trick16 div {
+            width: 30px;
+            height: 30px;
+            background: #1abc9c;
+        }
+
+        /* Trick 17: Logical properties */
+        .trick17 {
+            margin-block: 20px;
+            padding-inline: 10px;
+            background: #34495e;
+        }
+
+        /* Trick 18: Container queries */
+        .trick18 {
+            container-type: inline-size;
+        }
+
+        @container (min-width: 200px) {
+            .trick18 {
+                background: #d35400;
+            }
+        }
+
+        /* Trick 19: Scrollbar styling */
+        .trick19::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .trick19::-webkit-scrollbar-thumb {
+            background: #2980b9;
+            border-radius: 4px;
+        }
+
+        .trick19 {
+            overflow: auto;
+            height: 100px;
+        }
+
+        /* Trick 20: Text-stroke */
+        .trick20 {
+            -webkit-text-stroke: 1px #c0392b;
+            color: transparent;
+        }
+
+        /* Trick 21: Masking */
+        .trick21 {
+            mask-image: linear-gradient(to bottom, transparent, black);
+            background: #27ae60;
+        }
+
+        /* Trick 22: Subgrid */
+        .trick22 {
+            display: grid;
+            grid-template-columns: subgrid;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card trick1">1. Glassmorphism</div>
+        <div class="card trick2">2. Clip-path</div>
+        <div class="card trick3">3. Variable Fonts</div>
+        <div class="card trick4">4. Aspect Ratio</div>
+        <div class="card trick5">
+            <div>5. Scroll Snap</div>
+            <div>Scroll Me</div>
+        </div>
+        <div class="card trick6"><img src="https://via.placeholder.com/150" alt="Object Fit"></div>
+        <div class="card trick7">7. Filter</div>
+        <div class="card trick8">8. Blend Mode</div>
+        <div class="card trick9">9. Sticky Position</div>
+        <div class="card trick10">10. Custom Properties</div>
+        <div class="card trick11">11. Shape-outside</div>
+        <div class="card trick12">12. Conic Gradient</div>
+        <div class="card trick13">13. Overscroll Behavior<div>Scroll content</div>
+        </div>
+        <div class="card trick14">14. Text Gradient</div>
+        <div class="card trick15"><input type="checkbox"> 15. Accent Color</div>
+        <div class="card trick16">
+            <div></div>
+            <div></div>16. Flex Gap
+        </div>
+        <div class="card trick17">17. Logical Properties</div>
+        <div class="card trick18">18. Container Queries</div>
+        <div class="card trick19">19. Scrollbar Styling<div>Scroll content</div>
+        </div>
+        <div class="card trick20">20. Text-stroke</div>
+        <div class="card trick21">21. Masking</div>
+        <div class="card trick22">22. Subgrid</div>
+    </div>
+</body>
+
+</html>
